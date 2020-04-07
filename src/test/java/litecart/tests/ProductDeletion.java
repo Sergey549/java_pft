@@ -9,10 +9,10 @@ public class ProductDeletion extends TestBase {
   @Test
   public void testUntitledTestCase() throws Exception {
 
-    app.gotoProductCreation();
-    app.FindProduct();
+    app.getProductHelper().gotoProductCreation();
+    app.getProductHelper().FindProduct();
     app.acceptNextAlert = true;
-    app.DeleteProduct();
+    app.getProductHelper().DeleteProduct();
     assertTrue(app.closeAlertAndGetItsText().matches("^Are you sure[\\s\\S]$"));
   }
 

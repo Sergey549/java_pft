@@ -8,10 +8,10 @@ public class ProductAdding extends TestBase {
 
   @Test
   public void testProductAdding() throws Exception {
-    app.gotoProductCreation();
-    app.initProductCreation();
-    app.fillProductForm(new ProductData("Test1", "Test2"));
-    app.saveProductForm();
+    app.getProductHelper().gotoProductCreation();
+    app.getProductHelper().initProductCreation();
+    app.getProductHelper().fillProductForm(new ProductData("Test1", "Test2"));
+    app.getProductHelper().saveProductForm();
   }
 
 
