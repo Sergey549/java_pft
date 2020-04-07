@@ -1,6 +1,7 @@
 package litecart;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 import java.util.regex.Pattern;
 import java.util.concurrent.TimeUnit;
 import org.junit.*;
@@ -50,6 +51,8 @@ public class ProductAdding {
     driver = null;
   }
 =======
+=======
+>>>>>>> parent of 04f845b... Делегирование
 import org.junit.Test;
 
 public class ProductAdding extends TestBase {
@@ -63,6 +66,9 @@ public class ProductAdding extends TestBase {
     saveProductForm();
   }
 
+<<<<<<< HEAD
+>>>>>>> parent of 04f845b... Делегирование
+=======
 >>>>>>> parent of 04f845b... Делегирование
 
 }
