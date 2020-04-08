@@ -1,4 +1,4 @@
-package litecart;
+package litecart.model;
 
 public class ProductData {
     private final String productName;

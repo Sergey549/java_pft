@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement />
+  <nodes>
+    <node x="0.0" y="527.0">litecart.tests.ProductCreation</node>
+    <node x="111.75" y="376.0">litecart.tests.TestBase</node>
+    <node x="454.0" y="376.0">litecart.model.ProductData</node>
+    <node x="0.0" y="626.0">litecart.appmanager.NavigationHelper</node>
+    <node x="215.0" y="527.0">litecart.tests.ProductDeletion</node>
+    <node x="319.0" y="0.0">litecart.appmanager.ProductHelper</node>
+    <node x="283.0" y="626.0">litecart.appmanager.SessionHelper</node>
+    <node x="0.0" y="0.0">litecart.appmanager.ApplicationManager</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="litecart.tests.ProductDeletion" target="litecart.tests.TestBase">
+      <point x="0.0" y="-27.0" />
+      <point x="312.0" y="502.0" />
+      <point x="251.25" y="502.0" />
+      <point x="46.5" y="50.5" />
+    </edge>
+    <edge source="litecart.tests.ProductCreation" target="litecart.tests.TestBase">
+      <point x="0.0" y="-27.0" />
+      <point x="97.5" y="502.0" />
+      <point x="158.25" y="502.0" />
+      <point x="-46.5" y="50.5" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="1.0" x="451.0" y="406.0" />
+  <SelectedNodes>
+    <node>litecart.tests.ProductCreation</node>
+  </SelectedNodes>
+  <Categories>
+    <Category>Fields</Category>
+    <Category>Constructors</Category>
+    <Category>Methods</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+
