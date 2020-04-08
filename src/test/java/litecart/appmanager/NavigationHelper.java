@@ -5,8 +5,6 @@ import org.openqa.selenium.chrome.ChromeDriver;
 
 public class NavigationHelper extends HelperBase {
 
-    private ChromeDriver driver;
-
 
     public NavigationHelper(ChromeDriver driver) {
 
@@ -15,6 +13,7 @@ public class NavigationHelper extends HelperBase {
     }
 
     public void goToCatalog() {
+
         click(By.xpath("//ul[@id='box-apps-menu']/li[2]/a/span[2]"));
 
     }

@@ -12,6 +12,7 @@ public class ProductHelper extends HelperBase {
     private boolean acceptNextAlert = true;
 
     public ProductHelper(ChromeDriver driver) {
+
         super(driver);
     }
 
@@ -51,6 +52,11 @@ public class ProductHelper extends HelperBase {
     }
 
     public void FindProductToBeDeleted() {
-        click(By.name("products[37]"));
+        click(By.name("products[39]"));
+    }
+
+    public void initEditProduct() {
+
+        click(By.xpath("//div[@id='content']/div/div[3]/form/table/tbody/tr[3]/td[6]/a/i"));
     }
 }

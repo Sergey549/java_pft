@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 public class HelperBase {
+
     protected ChromeDriver driver;
 
     public HelperBase(ChromeDriver driver) {
@@ -19,4 +20,5 @@ public class HelperBase {
         driver.findElement(locator).clear();
         driver.findElement(locator).sendKeys(text);
     }
+
 }
