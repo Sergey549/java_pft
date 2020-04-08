@@ -3,13 +3,11 @@ package litecart.appmanager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.chrome.ChromeDriver;
 
-public class SessionHelper {
-
-    private ChromeDriver driver;
+public class SessionHelper extends HelperBase {
 
     public SessionHelper(ChromeDriver driver) {
 
-        this.driver = driver;
+        super(driver);
     }
 
     protected void login(String username, String password) {

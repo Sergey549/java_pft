@@ -7,32 +7,26 @@ import org.openqa.selenium.chrome.ChromeDriver;
 
 import static org.junit.Assert.assertTrue;
 
-public class ProductHelper {
-
-   private ChromeDriver driver;
+public class ProductHelper extends HelperBase {
 
     private boolean acceptNextAlert = true;
 
     public ProductHelper(ChromeDriver driver) {
-        this.driver = driver;
+        super(driver);
     }
 
     public void SaveNewProduct() {
-      driver.findElement(By.name("save")).click();
+      click(By.name("save"));
     }
 
     public void fillProductForm(ProductData productData) {
-      driver.findElement(By.name("name[en]")).click();
-      driver.findElement(By.name("name[en]")).clear();
-      driver.findElement(By.name("name[en]")).sendKeys(productData.getProductName());
-      driver.findElement(By.linkText("Information")).click();
-      driver.findElement(By.name("short_description[en]")).click();
-      driver.findElement(By.name("short_description[en]")).clear();
-      driver.findElement(By.name("short_description[en]")).sendKeys(productData.getProductDescription());
+        type(By.name("name[en]"), productData.getProductName());
+        click(By.linkText("Information"));
+        type(By.name("short_description[en]"), productData.getProductDescription());
     }
 
     public void AddNewProduct() {
-      driver.findElement(By.linkText("Add New Product")).click();
+        click(By.linkText("Add New Product"));
     }
 
     private String closeAlertAndGetItsText() {
@@ -52,11 +46,11 @@ public class ProductHelper {
 
     public void DeleteProduct() {
       acceptNextAlert = true;
-      driver.findElement(By.name("delete")).click();
-      assertTrue(closeAlertAndGetItsText().matches("^Are you sure[\\s\\S]$"));
+        click(By.name("delete"));
+        assertTrue(closeAlertAndGetItsText().matches("^Are you sure[\\s\\S]$"));
     }
 
     public void FindProductToBeDeleted() {
-      driver.findElement(By.name("products[34]")).click();
+        click(By.name("products[34]"));
     }
 }
