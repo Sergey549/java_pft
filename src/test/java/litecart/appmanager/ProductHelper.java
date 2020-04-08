@@ -51,6 +51,6 @@ public class ProductHelper extends HelperBase {
     }
 
     public void FindProductToBeDeleted() {
-        click(By.name("products[34]"));
+        click(By.name("products[37]"));
     }
 }
