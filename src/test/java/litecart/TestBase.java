@@ -10,12 +10,13 @@ import org.openqa.selenium.chrome.ChromeDriver;
 
 import java.util.concurrent.TimeUnit;
 
+import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 public class TestBase {
-    protected boolean acceptNextAlert = true;
     ChromeDriver driver;
     private String baseUrl;
+    private boolean acceptNextAlert = true;
     private StringBuffer verificationErrors = new StringBuffer();
 
     @Before
@@ -26,6 +27,28 @@ public class TestBase {
       login("admin", "admin");
     }
 
+    protected void SaveNewProduct() {
+      driver.findElement(By.name("save")).click();
+    }
+
+    protected void fillProductForm(ProductData productData) {
+      driver.findElement(By.name("name[en]")).click();
+      driver.findElement(By.name("name[en]")).clear();
+      driver.findElement(By.name("name[en]")).sendKeys(productData.getProductName());
+      driver.findElement(By.linkText("Information")).click();
+      driver.findElement(By.name("short_description[en]")).click();
+      driver.findElement(By.name("short_description[en]")).clear();
+      driver.findElement(By.name("short_description[en]")).sendKeys(productData.getProductDescription());
+    }
+
+    protected void AddNewProduct() {
+      driver.findElement(By.linkText("Add New Product")).click();
+    }
+
+    protected void goToCatalog() {
+      driver.findElement(By.xpath("//ul[@id='box-apps-menu']/li[2]/a/span[2]")).click();
+    }
+
     private void login(String username, String password) {
       driver.findElement(By.name("username")).click();
       driver.findElement(By.name("username")).clear();
@@ -33,43 +56,6 @@ public class TestBase {
       driver.findElement(By.name("password")).clear();
       driver.findElement(By.name("password")).sendKeys(password);
       driver.findElement(By.xpath("//button[@name='login']")).click();
-    }
-
-    protected void fillProductForm(ProductData productData) {
-      driver.findElement(By.name("name[en]")).click();
-      driver.findElement(By.name("name[en]")).clear();
-      driver.findElement(By.name("name[en]")).sendKeys(productData.getName());
-      driver.findElement(By.linkText("Information")).click();
-      driver.findElement(By.name("short_description[en]")).click();
-      driver.findElement(By.name("short_description[en]")).clear();
-      driver.findElement(By.name("short_description[en]")).sendKeys(productData.getShortDescription());
-    }
-
-    protected void gotoProductCreation() {
-      driver.findElement(By.xpath("//ul[@id='box-apps-menu']/li[2]/a/span[2]")).click();
-    }
-
-    protected void initProductCreation() {
-      driver.findElement(By.linkText("Add New Product")).click();
-    }
-
-    protected void saveProductForm() {
-      driver.findElement(By.name("save")).click();
-    }
-
-    @After
-    public void stop() {
-      driver.quit();
-      driver = null;
-    }
-
-
-    protected void DeleteProduct() {
-      driver.findElement(By.name("delete")).click();
-    }
-
-    protected void FindProduct() {
-      driver.findElement(By.name("products[25]")).click();
     }
 
     @After
@@ -99,7 +85,7 @@ public class TestBase {
       }
     }
 
-    protected String closeAlertAndGetItsText() {
+    private String closeAlertAndGetItsText() {
       try {
         Alert alert = driver.switchTo().alert();
         String alertText = alert.getText();
@@ -112,5 +98,15 @@ public class TestBase {
       } finally {
         acceptNextAlert = true;
       }
+    }
+
+    protected void DeleteProduct() {
+      acceptNextAlert = true;
+      driver.findElement(By.name("delete")).click();
+      assertTrue(closeAlertAndGetItsText().matches("^Are you sure[\\s\\S]$"));
+    }
+
+    protected void FindProductToBeDeleted() {
+      driver.findElement(By.name("products[34]")).click();
     }
 }

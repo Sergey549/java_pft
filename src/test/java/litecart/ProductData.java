@@ -1,20 +1,19 @@
 package litecart;
 
 public class ProductData {
-    private final String name;
-    private final String shortDescription;
+    private final String productName;
+    private final String productDescription;
 
-    public ProductData(String Name, String ShortDescription) {
-        name = Name;
-        shortDescription = ShortDescription;
+    public ProductData(String ProductName, String ProductDescription) {
+        productName = ProductName;
+        productDescription = ProductDescription;
     }
 
-    public String getName() {
-        return name;
+    public String getProductName() {
+        return productName;
     }
 
-    public String getShortDescription() {
-        return shortDescription;
+    public String getProductDescription() {
+        return productDescription;
     }
-
 }
