@@ -1,24 +1,34 @@
 package litecart.tests;
 
-import litecart.appmanager.ApplicationManager;
 import org.junit.After;
 import org.junit.Before;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
+import java.util.concurrent.TimeUnit;
 
 public class TestBase {
-
-    protected final ApplicationManager app = new ApplicationManager();
+    public WebDriver driver;
+    private WebDriverWait wait;
 
     @Before
-    public void setUp() throws Exception {
-        app.init();
+    public void start() {
+        if (driver !=null) {
+            return;
+        }
+        System.setProperty("webdriver.chrome.driver","C:\\Windows\\System32\\chromedriver.exe");
+        driver = new ChromeDriver();
+        driver.manage().timeouts().pageLoadTimeout(5, TimeUnit.SECONDS);
+        wait = new WebDriverWait(driver, 5);
+
+        Runtime.getRuntime().addShutdownHook(
+                new Thread(() -> {driver.quit(); driver = null;}));
     }
 
     @After
-    public void tearDown() throws Exception {
-        app.stop();
+    public void stop() {
+        //driver.quit();
+        //driver = null;
     }
-
 }
