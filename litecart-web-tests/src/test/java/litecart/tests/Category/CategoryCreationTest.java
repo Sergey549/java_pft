@@ -12,6 +12,7 @@ public class CategoryCreationTest extends TestBase {
         app.getCategoryHelper().initCategoryCreation();
         app.getCategoryHelper().fillCategoryForm(new CategoryData
                 ("Category1", null, null));
+        app.getCategoryHelper().deleteCategory(false);
         app.getCategoryHelper().saveCategory();
     }
 }
