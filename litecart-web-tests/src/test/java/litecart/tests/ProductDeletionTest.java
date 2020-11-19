@@ -7,11 +7,11 @@ public class ProductDeletionTest extends TestBase {
     @Test
     public void testProductDeletion() throws Exception {
         app.checkAdminMainPageIsTrue();
-        app.goToCatalog();
-        app.checkProductToBeDeleted();
-        app.deleteProduct();
-        app.acceptDeletion();
-        app.checkProductToBeDeletedSuccessfully();
+        app.getNavigationHelper().goToCatalog();
+        app.getProductHelper().chooseProductToBeDeleted();
+        app.getProductHelper().deleteProduct();
+        app.getProductHelper().acceptDeletion();
+        app.getProductHelper().checkProductToBeDeletedSuccessfully();
     }
 }
 

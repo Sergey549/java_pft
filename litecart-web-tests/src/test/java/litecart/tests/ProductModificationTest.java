@@ -3,16 +3,15 @@ package litecart.tests;
 import litecart.model.ProductData;
 import org.junit.Test;
 
-public class ProductCreationTest extends TestBase {
+public class ProductModificationTest extends TestBase{
 
     @Test
-    public void testProductCreation() throws Exception {
+    public void testProductModification (){
         app.checkAdminMainPageIsTrue();
         app.getNavigationHelper().goToCatalog();
-        app.getProductHelper().initProductCreation();
+        app.getProductHelper().initProductModification();
         app.getProductHelper().fillProductForm(new ProductData
-                ("Duck1", "test1", "test2", "test3"));
+                ("Duck10", "test1", "test2", "test3"));
         app.getProductHelper().saveProduct();
     }
 }
-
