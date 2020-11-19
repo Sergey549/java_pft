@@ -1,5 +1,6 @@
-package litecart.tests;
+package litecart.tests.Product;
 
+import litecart.tests.TestBase;
 import org.junit.Test;
 
 public class ProductDeletionTest extends TestBase {

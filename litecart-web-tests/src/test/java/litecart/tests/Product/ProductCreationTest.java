@@ -1,17 +1,19 @@
-package litecart.tests;
+package litecart.tests.Product;
 
 import litecart.model.ProductData;
+import litecart.tests.TestBase;
 import org.junit.Test;
 
-public class ProductModificationTest extends TestBase{
+public class ProductCreationTest extends TestBase {
 
     @Test
-    public void testProductModification (){
+    public void testProductCreation() throws Exception {
         app.checkAdminMainPageIsTrue();
         app.getNavigationHelper().goToCatalog();
-        app.getProductHelper().initProductModification();
+        app.getProductHelper().initProductCreation();
         app.getProductHelper().fillProductForm(new ProductData
-                ("Duck10", "test1", "test2", "test3"));
+                ("Duck11", null, null, null));
         app.getProductHelper().saveProduct();
     }
 }
+

@@ -11,7 +11,7 @@ public class ProductHelper extends HelperBase {
 
     private boolean acceptNextAlert = true;
 
-    public ProductHelper(ChromeDriver driver) {
+    public ProductHelper(WebDriver driver) {
         super(driver);
     }
 
@@ -65,7 +65,7 @@ public class ProductHelper extends HelperBase {
     }
 
     public void initProductModification() {
-    click(By.xpath("//form[@name='catalog_form']/table/tbody/tr/td/a[contains(@href,'35') and contains (@title, 'Edit')]"));
+    click(By.xpath("//form[@name='catalog_form']/table/tbody/tr/td/a[contains(@href,'id=0&product') and contains(@href,'74') and contains (@title, 'Edit')]"));
     }
 
 }
