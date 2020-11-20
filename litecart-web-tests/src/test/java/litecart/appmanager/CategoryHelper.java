@@ -29,22 +29,14 @@ public class CategoryHelper extends HelperBase {
     }
 
     public void initCategoryModification() {
-        click(By.xpath("//form[@name='catalog_form']/table/tbody/tr/td/a[contains(@href,'category&category') and contains(@href,'4') and contains (@title, 'Edit')]"));
+        click(By.xpath("//form[@name='catalog_form']/table/tbody/tr/td/a[contains(@href,'category&category') " +
+                "and contains(@href,'4') and contains (@title, 'Edit')]"));
     }
     public void deleteCategory(boolean modific) {
         if (modific) {
             driver.findElement(By.name("delete"));
         } else
             Assert.assertFalse(isElementPresent(By.name("delete")));
-    }
-
-    private boolean isElementPresent(By locator) {
-        try {
-            driver.findElement(locator);
-            return true;
-        } catch (NoSuchElementException e) {
-            return false;
-        }
     }
 }
 

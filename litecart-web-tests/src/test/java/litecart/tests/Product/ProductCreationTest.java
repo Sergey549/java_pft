@@ -10,10 +10,8 @@ public class ProductCreationTest extends TestBase {
     public void testProductCreation() throws Exception {
         app.checkAdminMainPageIsTrue();
         app.getNavigationHelper().goToCatalog();
-        app.getProductHelper().initProductCreation();
-        app.getProductHelper().fillProductForm(new ProductData
+        app.getProductHelper().createProduct(new ProductData
                 ("Duck11", null, null, null));
-        app.getProductHelper().saveProduct();
     }
 }
 

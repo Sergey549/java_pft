@@ -10,9 +10,13 @@ public class ProductModificationTest extends TestBase {
     public void testProductModification (){
         app.checkAdminMainPageIsTrue();
         app.getNavigationHelper().goToCatalog();
+        if (! app.getProductHelper().isThereAProduct()) {
+            app.getProductHelper().createProduct(new ProductData
+                    ("Duck11", null, null, null));
+        }
         app.getProductHelper().initProductModification();
         app.getProductHelper().fillProductForm(new ProductData
-                ("Duck8", "test1", "test2", "test3"));
+                ("Duck8", "test1", "test2", null));
         app.getProductHelper().saveProduct();
     }
 }

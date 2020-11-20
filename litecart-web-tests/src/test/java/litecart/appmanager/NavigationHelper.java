@@ -11,6 +11,6 @@ public class NavigationHelper extends HelperBase {
     }
 
     public void goToCatalog() {
-        click(By.xpath("//span[contains(.,'Catalog')]"));
+            click(By.xpath("//span[contains(.,'Catalog')]"));
     }
 }

@@ -28,7 +28,11 @@ public class ProductHelper extends HelperBase {
     }
 
     public void initProductCreation() {
-        click(By.xpath("//a[contains(.,' Add New Product')]"));
+        String catalogTitle = driver.findElement(By.cssSelector("div[class='panel-heading']")).getText();
+        if (!isElementPresent(By.cssSelector("div[class='panel-heading']"))
+                || catalogTitle.equals("Catalog")) {
+            click(By.xpath("//a[contains(.,' Add New Product')]"));
+        }
     }
 
     public void checkProductToBeDeletedSuccessfully() {
@@ -45,8 +49,8 @@ public class ProductHelper extends HelperBase {
         click(By.name("delete"));
     }
 
-    public void chooseProductToBeDeleted() {
-        click(By.name("products[71]"));
+    public void selectProductToBeDeleted() {
+        click(By.xpath("//tr[@class=' semi-transparent']/td/input[contains(@type,'checkbox')]"));
     }
 
     private String closeAlertAndGetItsText() {
@@ -65,7 +69,17 @@ public class ProductHelper extends HelperBase {
     }
 
     public void initProductModification() {
-    click(By.xpath("//form[@name='catalog_form']/table/tbody/tr/td/a[contains(@href,'id=0&product') and contains(@href,'74') and contains (@title, 'Edit')]"));
+        click(By.xpath("//form[@name='catalog_form']/table/tbody/tr/td/a[contains(@href,'id=0&product') " +
+                "and contains (@title, 'Edit')]"));
     }
 
+    public void createProduct(ProductData product) {
+        initProductCreation();
+        fillProductForm(product);
+        saveProduct();
+    }
+
+    public boolean isThereAProduct() {
+        return (isElementPresent(By.xpath("//tr[@class=' semi-transparent']/td/input[contains(@type,'checkbox')]")));
+    }
 }
