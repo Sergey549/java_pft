@@ -5,6 +5,9 @@ import org.junit.Assert;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.junit.Assert.assertTrue;
 
 public class ProductHelper extends HelperBase {
@@ -87,5 +90,16 @@ public class ProductHelper extends HelperBase {
     public int getProductCount() {
     return driver.findElements(
             By.xpath("//tr[@class=' semi-transparent']/td/input[contains(@type,'checkbox')]")).size();
+    }
+
+    public List<ProductData> getProductList() {
+        List<ProductData> products = new ArrayList<ProductData>();
+        List<WebElement> elements = driver.findElements(By.cssSelector("tr.semi-transparent"));
+        for (WebElement element: elements) {
+            String name = element.getText();
+            ProductData product = new ProductData(name, null, null, null);
+            products.add(product);
+        }
+        return products;
     }
 }

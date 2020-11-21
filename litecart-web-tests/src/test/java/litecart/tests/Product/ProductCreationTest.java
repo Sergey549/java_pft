@@ -5,17 +5,19 @@ import litecart.tests.TestBase;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.util.List;
+
 public class ProductCreationTest extends TestBase {
 
     @Test
     public void testProductCreation() throws Exception {
         app.checkAdminMainPageIsTrue();
         app.getNavigationHelper().goToCatalog();
-        int before = app.getProductHelper().getProductCount();
+        List<ProductData> before = app.getProductHelper().getProductList();
         app.getProductHelper().createProduct(new ProductData
                 ("Duck11", null, null, null));
-        int after = app.getProductHelper().getProductCount();
-        Assert.assertEquals(after, before + 1);
+        List<ProductData> after = app.getProductHelper().getProductList();
+        Assert.assertEquals(after.size(), before.size() + 1);
     }
 }
 
