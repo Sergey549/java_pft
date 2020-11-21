@@ -82,4 +82,9 @@ public class ProductHelper extends HelperBase {
     public boolean isThereAProduct() {
         return (isElementPresent(By.xpath("//tr[@class=' semi-transparent']/td/input[contains(@type,'checkbox')]")));
     }
+
+    public int getProductCount() {
+    return driver.findElements(
+            By.xpath("//tr[@class=' semi-transparent']/td/input[contains(@type,'checkbox')]")).size();
+    }
 }
