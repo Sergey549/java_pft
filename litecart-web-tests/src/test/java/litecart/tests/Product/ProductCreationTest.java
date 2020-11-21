@@ -15,7 +15,7 @@ public class ProductCreationTest extends TestBase {
         app.getProductHelper().createProduct(new ProductData
                 ("Duck11", null, null, null));
         int after = app.getProductHelper().getProductCount();
-        Assert.assertEquals(after, before+1);
+        Assert.assertEquals(after, before + 1);
     }
 }
 

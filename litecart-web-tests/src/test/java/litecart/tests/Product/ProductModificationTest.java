@@ -16,7 +16,7 @@ public class ProductModificationTest extends TestBase {
             app.getProductHelper().createProduct(new ProductData
                     ("Duck11", null, null, null));
         }
-        app.getProductHelper().initProductModification();
+        app.getProductHelper().selectProductToBeModificated(before - 1);
         app.getProductHelper().fillProductForm(new ProductData
                 ("Duck8", "test1", "test2", null));
         app.getProductHelper().saveProduct();

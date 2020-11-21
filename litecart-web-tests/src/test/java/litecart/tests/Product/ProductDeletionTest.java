@@ -16,12 +16,12 @@ public class ProductDeletionTest extends TestBase {
             app.getProductHelper().createProduct(new ProductData
                     ("Duck11", null, null, null));
         }
-        app.getProductHelper().selectProductToBeDeleted();
+        app.getProductHelper().selectProductToBeDeleted(before - 1);
         app.getProductHelper().deleteProduct();
         app.getProductHelper().acceptDeletion();
         app.getProductHelper().checkProductToBeDeletedSuccessfully();
         int after = app.getProductHelper().getProductCount();
-        Assert.assertEquals(after, before-1);
+        Assert.assertEquals(after, before - 1);
     }
 }
 

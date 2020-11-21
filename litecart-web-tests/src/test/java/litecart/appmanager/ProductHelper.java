@@ -49,8 +49,9 @@ public class ProductHelper extends HelperBase {
         click(By.name("delete"));
     }
 
-    public void selectProductToBeDeleted() {
-        click(By.xpath("//tr[@class=' semi-transparent']/td/input[contains(@type,'checkbox')]"));
+    public void selectProductToBeDeleted(int index) {
+        driver.findElements(By.xpath
+                ("//tr[@class=' semi-transparent']/td/input[contains(@type,'checkbox')]")).get(index).click();
     }
 
     private String closeAlertAndGetItsText() {
@@ -68,9 +69,9 @@ public class ProductHelper extends HelperBase {
         }
     }
 
-    public void initProductModification() {
-        click(By.xpath("//form[@name='catalog_form']/table/tbody/tr/td/a[contains(@href,'id=0&product') " +
-                "and contains (@title, 'Edit')]"));
+    public void selectProductToBeModificated(int index) {
+        driver.findElements(By.xpath("//form[@name='catalog_form']/table/tbody/tr/td/a[contains(@href,'id=0&product') " +
+                "and contains (@title, 'Edit')]")).get(index).click();
     }
 
     public void createProduct(ProductData product) {
