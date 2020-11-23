@@ -5,6 +5,7 @@ import litecart.tests.TestBase;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 
@@ -30,6 +31,17 @@ public class ProductModificationTest extends TestBase {
 
         before.remove(before.size() - 1);
         before.add(group);
+
+// Сравниваем множества элементов списка, где игнорируется порядок элементов
+
         Assert.assertEquals(new HashSet<>(before), new HashSet<>(after));
+
+// Вариант 2 -> сравнение списков, где происходит сортировка (упорядочивание) элементов списка
+// по Id (идентификаторам) и затем сравнение
+
+//        Comparator<? super ProductData> byId = Comparator.comparingInt(ProductData::getId);
+//        before.sort(byId);
+//        after.sort(byId);
+//        Assert.assertEquals(before, after);
     }
 }

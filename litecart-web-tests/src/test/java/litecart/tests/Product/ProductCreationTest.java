@@ -30,13 +30,21 @@ public class ProductCreationTest extends TestBase {
 //        }
 //        group.setId(max);
 
-        // Преобразовал цикл, вводим анонимную функцию (лямбда выражение) - >
-        // Новый список превращаем в поток.
-        // У потока есть метод max, в который позволяет вычислять макс. элемент.
-        // Передаем компаратор (сравниватель) в качестве параметра. Получаем макс. элемент и его Id
+// Преобразовал цикл, вводим анонимную функцию (лямбда выражение) ->
+// Новый список превращаем в поток.
+// У потока есть метод max, в который позволяет вычислять макс. элемент.
+// Передаем компаратор (сравниватель) в качестве параметра. Получаем макс. элемент и его Id
+
         group.setId(after.stream().max(Comparator.comparingInt(ProductData::getId)).get().getId());
         before.add(group);
         Assert.assertEquals(new HashSet<>(before), new HashSet<>(after));
+
+//        before.add(group);
+//        Comparator<? super ProductData> byId = Comparator.comparingInt(ProductData::getId);
+//        before.sort(byId);
+//        after.sort(byId);
+//        Assert.assertEquals(before, after);
+
     }
 }
 
