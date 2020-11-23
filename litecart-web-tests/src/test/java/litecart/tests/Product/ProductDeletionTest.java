@@ -15,7 +15,7 @@ public class ProductDeletionTest extends TestBase {
         app.getNavigationHelper().goToCatalog();
         if (! app.getProductHelper().isThereAProduct()) {
             app.getProductHelper().createProduct(new ProductData
-                    ("Duck11", null, null, null));
+                    ("Duck1", null, null, null));
         }
         List<ProductData> before = app.getProductHelper().getProductList();
         app.getProductHelper().selectProductToBeDeleted(before.size() - 1);
@@ -24,6 +24,9 @@ public class ProductDeletionTest extends TestBase {
         app.getProductHelper().checkProductToBeDeletedSuccessfully();
         List<ProductData> after = app.getProductHelper().getProductList();
         Assert.assertEquals(after.size(), before.size() - 1);
+
+        before.remove(before.size() - 1);
+        Assert.assertEquals(before, after);
     }
 }
 

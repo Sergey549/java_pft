@@ -97,7 +97,8 @@ public class ProductHelper extends HelperBase {
         List<WebElement> elements = driver.findElements(By.cssSelector("tr.semi-transparent"));
         for (WebElement element: elements) {
             String name = element.getText();
-            ProductData product = new ProductData(name, null, null, null);
+            int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
+            ProductData product = new ProductData(id, name, null, null, null);
             products.add(product);
         }
         return products;

@@ -5,6 +5,7 @@ import litecart.tests.TestBase;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.util.HashSet;
 import java.util.List;
 
 public class ProductCreationTest extends TestBase {
@@ -14,10 +15,21 @@ public class ProductCreationTest extends TestBase {
         app.checkAdminMainPageIsTrue();
         app.getNavigationHelper().goToCatalog();
         List<ProductData> before = app.getProductHelper().getProductList();
-        app.getProductHelper().createProduct(new ProductData
-                ("Duck11", null, null, null));
+        ProductData group = new ProductData
+                ("Duck1", null, null, null);
+        app.getProductHelper().createProduct(group);
         List<ProductData> after = app.getProductHelper().getProductList();
         Assert.assertEquals(after.size(), before.size() + 1);
+
+        int max =0;
+        for (ProductData g: after) {
+            if (g.getId() > max) {
+                max = g.getId();
+            }
+        }
+        group.setId(max);
+        before.add(group);
+        Assert.assertEquals(new HashSet<>(before), new HashSet<>(after));
     }
 }
 
