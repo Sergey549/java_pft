@@ -2,8 +2,8 @@ package litecart.tests.Product;
 
 import litecart.model.ProductData;
 import litecart.tests.TestBase;
-import org.junit.Assert;
-import org.junit.Test;
+import org.testng.Assert;
+import org.testng.annotations.Test;
 
 import java.util.Comparator;
 import java.util.HashSet;

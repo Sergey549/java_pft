@@ -2,7 +2,7 @@ package litecart.tests.Category;
 
 import litecart.model.CategoryData;
 import litecart.tests.TestBase;
-import org.junit.Test;
+import org.testng.annotations.Test;
 
 public class CategoryCreationTest extends TestBase {
     @Test

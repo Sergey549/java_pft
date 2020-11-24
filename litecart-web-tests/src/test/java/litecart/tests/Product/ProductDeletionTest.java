@@ -2,9 +2,10 @@ package litecart.tests.Product;
 
 import litecart.model.ProductData;
 import litecart.tests.TestBase;
-import org.junit.Assert;
-import org.junit.Test;
+import org.testng.Assert;
+import org.testng.annotations.Test;
 
+import java.util.HashSet;
 import java.util.List;
 
 public class ProductDeletionTest extends TestBase {
@@ -26,7 +27,7 @@ public class ProductDeletionTest extends TestBase {
         Assert.assertEquals(after.size(), before.size() - 1);
 
         before.remove(before.size() - 1);
-        Assert.assertEquals(before, after);
+        Assert.assertEquals(new HashSet<>(before), new HashSet<>(after));
     }
 }
 

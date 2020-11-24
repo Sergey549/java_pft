@@ -1,20 +1,20 @@
 package litecart.tests;
 
 import litecart.appmanager.ApplicationManager;
-import org.junit.After;
-import org.junit.Before;
 import org.openqa.selenium.remote.BrowserType;
+import org.testng.annotations.AfterSuite;
+import org.testng.annotations.BeforeSuite;
 
 public class TestBase {
 
-    protected final ApplicationManager app = new ApplicationManager(BrowserType.CHROME);
+    protected static final ApplicationManager app = new ApplicationManager(BrowserType.CHROME);
 
-    @Before
+    @BeforeSuite
     public void setUp() throws Exception {
         app.init();
     }
 
-    @After
+    @AfterSuite
     public void tearDown() throws Exception {
         app.stop();
     }

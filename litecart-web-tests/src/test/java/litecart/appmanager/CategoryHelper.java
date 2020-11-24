@@ -1,10 +1,10 @@
 package litecart.appmanager;
 
 import litecart.model.CategoryData;
-import org.junit.Assert;
+
 import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
+import org.testng.Assert;
 
 public class CategoryHelper extends HelperBase {
 

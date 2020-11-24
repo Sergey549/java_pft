@@ -1,9 +1,8 @@
 package litecart.tests.Category;
 
 import litecart.model.CategoryData;
-import litecart.model.ProductData;
 import litecart.tests.TestBase;
-import org.junit.Test;
+import org.testng.annotations.Test;
 
 public class CategoryModificationTest extends TestBase {
 
