@@ -7,19 +7,19 @@ import org.testng.annotations.Test;
 
 import java.util.Comparator;
 import java.util.HashSet;
-import java.util.List;
+import java.util.Set;
 
 public class ProductCreationTest extends TestBase {
 
     @Test
-    public void testProductCreation() throws Exception {
+    public void testProductCreation() {
         app.checkAdminMainPageIsTrue();
-        app.getNavigationHelper().goToCatalog();
-        List<ProductData> before = app.getProductHelper().getProductList();
-        ProductData group = new ProductData
+        app.goTo().Catalog();
+        Set<ProductData> before = app.product().all();
+        ProductData product = new ProductData
                 ("Duck2", null, null, null);
-        app.getProductHelper().createProduct(group);
-        List<ProductData> after = app.getProductHelper().getProductList();
+        app.product().create(product);
+        Set<ProductData> after = app.product().all();
         Assert.assertEquals(after.size(), before.size() + 1);
 
 //        int max =0;
@@ -35,8 +35,8 @@ public class ProductCreationTest extends TestBase {
 // У потока есть метод max, в который позволяет вычислять макс. элемент.
 // Передаем компаратор (сравниватель) в качестве параметра. Получаем макс. элемент и его Id
 
-        group.setId(after.stream().max(Comparator.comparingInt(ProductData::getId)).get().getId());
-        before.add(group);
+        product.setId(after.stream().max(Comparator.comparingInt(ProductData::getId)).get().getId());
+        before.add(product);
         Assert.assertEquals(new HashSet<>(before), new HashSet<>(after));
 
 //        before.add(group);

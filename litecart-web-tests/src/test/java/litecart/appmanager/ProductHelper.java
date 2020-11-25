@@ -8,7 +8,9 @@ import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import static org.testng.Assert.assertTrue;
 
@@ -54,9 +56,56 @@ public class ProductHelper extends HelperBase {
         click(By.name("delete"));
     }
 
-    public void selectProductToBeDeleted(int index) {
-        driver.findElements(By.xpath
-                ("//tr[@class=' semi-transparent']/td/input[contains(@type,'checkbox')]")).get(index).click();
+
+
+    public void create(ProductData product) {
+        initProductCreation();
+        fillProductForm(product);
+        saveProduct();
+    }
+
+    public void modify(ProductData product) {
+        selectProductToBeModificatedById(product.getId());
+        fillProductForm(product);
+        saveProduct();
+    }
+
+    private void selectProductToBeModificatedById(int id) {
+        driver.findElement(By.xpath("//form[@name='catalog_form']/table/tbody/tr/td/a[contains(@href,'"+id+"') " +
+                "and contains (@title, 'Edit')]")).click();
+    }
+
+    public void delete(ProductData deletedProduct) {
+        selectProductToBeDeletedById(deletedProduct.getId());
+        deleteProduct();
+        acceptDeletion();
+        checkProductToBeDeletedSuccessfully();
+    }
+
+    private void selectProductToBeDeletedById(int id) {
+        driver.findElement(By.cssSelector("input[value='"+id+"']")).click();
+    }
+
+    public boolean isThereAProduct() {
+        return (isElementPresent(By.xpath("//tr[@class=' semi-transparent']/td/input[contains(@type,'checkbox')]")));
+    }
+
+    public int getProductCount() {
+    return driver.findElements(
+            By.xpath("//tr[@class=' semi-transparent']/td/input[contains(@type,'checkbox')]")).size();
+    }
+
+
+    public Set<ProductData> all() {
+        Set<ProductData> products = new HashSet<>();
+        List<WebElement> elements = driver.findElements(By.cssSelector("tr.semi-transparent"));
+        for (WebElement element: elements) {
+            String name = element.getText();
+            int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
+            ProductData product = new ProductData(id, name, null, null, null);
+            products.add(product);
+        }
+        return products;
     }
 
     private String closeAlertAndGetItsText() {
@@ -74,35 +123,4 @@ public class ProductHelper extends HelperBase {
         }
     }
 
-    public void selectProductToBeModificated(int index) {
-        driver.findElements(By.xpath("//form[@name='catalog_form']/table/tbody/tr/td/a[contains(@href,'id=0&product') " +
-                "and contains (@title, 'Edit')]")).get(index).click();
-    }
-
-    public void createProduct(ProductData product) {
-        initProductCreation();
-        fillProductForm(product);
-        saveProduct();
-    }
-
-    public boolean isThereAProduct() {
-        return (isElementPresent(By.xpath("//tr[@class=' semi-transparent']/td/input[contains(@type,'checkbox')]")));
-    }
-
-    public int getProductCount() {
-    return driver.findElements(
-            By.xpath("//tr[@class=' semi-transparent']/td/input[contains(@type,'checkbox')]")).size();
-    }
-
-    public List<ProductData> getProductList() {
-        List<ProductData> products = new ArrayList<ProductData>();
-        List<WebElement> elements = driver.findElements(By.cssSelector("tr.semi-transparent"));
-        for (WebElement element: elements) {
-            String name = element.getText();
-            int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
-            ProductData product = new ProductData(id, name, null, null, null);
-            products.add(product);
-        }
-        return products;
-    }
 }

@@ -9,7 +9,7 @@ public class CategoryModificationTest extends TestBase {
     @Test
     public void testCategoryModification () {
         app.checkAdminMainPageIsTrue();
-        app.getNavigationHelper().goToCatalog();
+        app.goTo().Catalog();
         app.getCategoryHelper().initCategoryModification();
         app.getCategoryHelper().fillCategoryForm(new CategoryData
                 ("Category1", "test1", "test2"));

@@ -8,7 +8,7 @@ public class CategoryCreationTest extends TestBase {
     @Test
     public void testCategoryCreation () {
         app.checkAdminMainPageIsTrue();
-        app.getNavigationHelper().goToCatalog();
+        app.goTo().Catalog();
         app.getCategoryHelper().initCategoryCreation();
         app.getCategoryHelper().fillCategoryForm(new CategoryData
                 ("Category1", null, null));

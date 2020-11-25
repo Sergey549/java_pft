@@ -49,11 +49,11 @@ public class ApplicationManager {
         driver.quit();
     }
 
-    public ProductHelper getProductHelper() {
+    public ProductHelper product() {
         return productHelper;
     }
 
-    public NavigationHelper getNavigationHelper() {
+    public NavigationHelper goTo() {
         return navigationHelper;
     }
 

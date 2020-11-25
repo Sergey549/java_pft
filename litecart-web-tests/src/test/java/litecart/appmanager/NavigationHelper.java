@@ -10,7 +10,7 @@ public class NavigationHelper extends HelperBase {
         super(driver);
     }
 
-    public void goToCatalog() {
+    public void Catalog() {
             click(By.xpath("//span[contains(.,'Catalog')]"));
     }
 }

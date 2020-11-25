@@ -3,38 +3,38 @@ package litecart.tests.Product;
 import litecart.model.ProductData;
 import litecart.tests.TestBase;
 import org.testng.Assert;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import java.util.Comparator;
-import java.util.HashSet;
-import java.util.List;
+import java.util.Set;
 
 public class ProductModificationTest extends TestBase {
 
-    @Test
-    public void testProductModification (){
+    @BeforeMethod
+    public void ensurePreconditions() {
         app.checkAdminMainPageIsTrue();
-        app.getNavigationHelper().goToCatalog();
-
-        if (! app.getProductHelper().isThereAProduct()) {
-            app.getProductHelper().createProduct(new ProductData
+        app.goTo().Catalog();
+        if (app.product().all().size() == 0) {
+            app.product().create(new ProductData
                     ("Duck1", null, null, null));
         }
-        List<ProductData> before = app.getProductHelper().getProductList();
-        app.getProductHelper().selectProductToBeModificated(before.size() - 1);
-        ProductData group = new ProductData
-                (before.get(before.size() - 1).getId(), "Duck1", "test1", "test2", null) ;
-        app.getProductHelper().fillProductForm(group);
-        app.getProductHelper().saveProduct();
-        List<ProductData> after = app.getProductHelper().getProductList();
-        Assert.assertEquals(after.size(), before.size());
+    }
 
-        before.remove(before.size() - 1);
-        before.add(group);
+    @Test
+    public void testProductModification() {
+        Set<ProductData> before = app.product().all();
+        ProductData modifiedProduct = before.iterator().next();
+        ProductData product = new ProductData(modifiedProduct.getId(),
+                "Duck1", "test1", "test2", null) ;
+        app.product().modify(product);
+        Set<ProductData> after = app.product().all();
+        Assert.assertEquals(after.size(), before.size());
 
 // Сравниваем множества элементов списка, где игнорируется порядок элементов
 
-        Assert.assertEquals(new HashSet<>(before), new HashSet<>(after));
+        before.remove(modifiedProduct);
+        before.add(product);
+        Assert.assertEquals(before, after);
 
 // Вариант 2 -> сравнение списков, где происходит сортировка (упорядочивание) элементов списка
 // по Id (идентификаторам) и затем сравнение
@@ -44,4 +44,5 @@ public class ProductModificationTest extends TestBase {
 //        after.sort(byId);
 //        Assert.assertEquals(before, after);
     }
+
 }
