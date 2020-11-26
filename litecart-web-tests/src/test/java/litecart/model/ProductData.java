@@ -38,7 +38,7 @@ public class ProductData {
         this.technicalData = technicalData;
     }
 
-    public void setId(int id) {
+    public void withId(int id) {
         this.id = id;
     }
 

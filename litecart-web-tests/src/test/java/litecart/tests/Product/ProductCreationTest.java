@@ -22,6 +22,10 @@ public class ProductCreationTest extends TestBase {
         Set<ProductData> after = app.product().all();
         Assert.assertEquals(after.size(), before.size() + 1);
 
+        product.withId(after.stream().max(Comparator.comparingInt(ProductData::getId)).get().getId());
+        before.add(product);
+        Assert.assertEquals(before, after);
+
 //        int max =0;
 //        for (ProductData g: after) {
 //            if (g.getId() > max) {
@@ -34,10 +38,6 @@ public class ProductCreationTest extends TestBase {
 // Новый список превращаем в поток.
 // У потока есть метод max, в который позволяет вычислять макс. элемент.
 // Передаем компаратор (сравниватель) в качестве параметра. Получаем макс. элемент и его Id
-
-        product.setId(after.stream().max(Comparator.comparingInt(ProductData::getId)).get().getId());
-        before.add(product);
-        Assert.assertEquals(new HashSet<>(before), new HashSet<>(after));
 
 //        before.add(group);
 //        Comparator<? super ProductData> byId = Comparator.comparingInt(ProductData::getId);

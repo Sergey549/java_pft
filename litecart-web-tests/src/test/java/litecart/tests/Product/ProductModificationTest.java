@@ -29,9 +29,7 @@ public class ProductModificationTest extends TestBase {
         app.product().modify(product);
         Set<ProductData> after = app.product().all();
         Assert.assertEquals(after.size(), before.size());
-
 // Сравниваем множества элементов списка, где игнорируется порядок элементов
-
         before.remove(modifiedProduct);
         before.add(product);
         Assert.assertEquals(before, after);

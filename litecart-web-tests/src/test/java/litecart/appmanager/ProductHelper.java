@@ -7,7 +7,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -65,14 +64,13 @@ public class ProductHelper extends HelperBase {
     }
 
     public void modify(ProductData product) {
-        selectProductToBeModificatedById(product.getId());
+        selectProductToBeModifiedById(product.getId());
         fillProductForm(product);
         saveProduct();
     }
 
-    private void selectProductToBeModificatedById(int id) {
-        driver.findElement(By.xpath("//form[@name='catalog_form']/table/tbody/tr/td/a[contains(@href,'"+id+"') " +
-                "and contains (@title, 'Edit')]")).click();
+    private void selectProductToBeModifiedById(int id) {
+        driver.findElement(By.xpath("//td[@class='text-right']/a[contains(@href,'"+id+"')]")).click();
     }
 
     public void delete(ProductData deletedProduct) {
@@ -87,12 +85,12 @@ public class ProductHelper extends HelperBase {
     }
 
     public boolean isThereAProduct() {
-        return (isElementPresent(By.xpath("//tr[@class=' semi-transparent']/td/input[contains(@type,'checkbox')]")));
+        return (isElementPresent(By.xpath("//input[contains(@name,'products')]")));
     }
 
     public int getProductCount() {
     return driver.findElements(
-            By.xpath("//tr[@class=' semi-transparent']/td/input[contains(@type,'checkbox')]")).size();
+            By.xpath("//input[contains(@name,'products')]")).size();
     }
 
 
