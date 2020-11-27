@@ -4,6 +4,8 @@ import litecart.model.CategoryData;
 import litecart.tests.TestBase;
 import org.testng.annotations.Test;
 
+import java.io.File;
+
 public class CategoryModificationTest extends TestBase {
 
     @Test

@@ -16,7 +16,7 @@ public class ProductDeletionTest extends TestBase {
         app.goTo().Catalog();
         if (app.product().all().size() == 0) {
             app.product().create(new ProductData
-                    ("Duck1", null, null, null));
+                    ("Duck1", null, null, null, null));
         }
     }
 

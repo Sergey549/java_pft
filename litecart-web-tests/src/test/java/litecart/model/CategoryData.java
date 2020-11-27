@@ -1,5 +1,7 @@
 package litecart.model;
 
+import java.io.File;
+
 public class CategoryData {
 
     private final String categoryName;
@@ -7,13 +9,14 @@ public class CategoryData {
     private final String description;
 
 
-
     public CategoryData(String categoryName, String shortDescription, String description) {
 
         this.categoryName = categoryName;
         this.shortDescription = shortDescription;
         this.description = description;
+
     }
+
 
     public String getCategoryName() {
         return categoryName;

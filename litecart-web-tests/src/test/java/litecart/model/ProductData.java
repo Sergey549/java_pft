@@ -1,21 +1,24 @@
 package litecart.model;
 
+import java.io.File;
 import java.util.Objects;
 
 public class ProductData {
 
     private int id;
-    private final String duckName;
-    private final String shortDescription;
-    private final String description;
-    private final String technicalData;
+    private String duckName;
+    private String shortDescription;
+    private String description;
+    private String technicalData;
+    private File photo;
 
-    public ProductData(String duckName, String shortDescription, String description, String technicalData) {
+    public ProductData(String duckName, String shortDescription, String description, String technicalData, File photo) {
         this.id = 0;
         this.duckName = duckName;
         this.shortDescription = shortDescription;
         this.description = description;
         this.technicalData = technicalData;
+        this.photo = photo;
 
         // this.id = Integer.MAX_VALUE;
         // -> если хотим использовать сортировку элементов списка
@@ -38,9 +41,10 @@ public class ProductData {
         this.technicalData = technicalData;
     }
 
-    public void withId(int id) {
-        this.id = id;
+    public ProductData() {
+
     }
+
 
     public int getId() {
         return id;
@@ -61,6 +65,42 @@ public class ProductData {
     public String getTechnicalData() {
         return technicalData;
     }
+
+    public File getProductPhoto() {
+        return photo;
+    }
+
+
+    public ProductData withId(int id) {
+        this.id = id;
+        return this;
+    }
+
+    public ProductData withName(String duckName) {
+        this.duckName = duckName;
+        return this;
+    }
+
+    public ProductData withShortDescription(String shortDescription) {
+        this.shortDescription = shortDescription;
+        return this;
+    }
+
+    public ProductData withDescription(String description) {
+        this.description = description;
+        return this;
+    }
+
+    public ProductData withTechnicalData(String technicalData) {
+        this.technicalData = technicalData;
+        return this;
+    }
+
+    public ProductData withPhoto(File photo) {
+        this.photo = photo;
+        return this;
+    }
+
 
     @Override
     public boolean equals(Object o) {
@@ -83,5 +123,4 @@ public class ProductData {
                 ", duckName='" + duckName + '\'' +
                 '}';
     }
-
 }

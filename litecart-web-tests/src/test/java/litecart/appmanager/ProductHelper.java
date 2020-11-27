@@ -23,6 +23,7 @@ public class ProductHelper extends HelperBase {
 
     public void fillProductForm(ProductData productData) {
         type(By.name("name[en]"), productData.getDuckName());
+        attach(By.cssSelector("input[type='file']"),productData.getProductPhoto());
         click(By.linkText("Information"));
         type(By.name("short_description[en]"), productData.getShortDescription());
         type(By.xpath("//div[@id='en']/div[2]/div/div/div[2]"), productData.getDescription());
@@ -54,7 +55,6 @@ public class ProductHelper extends HelperBase {
     public void deleteProduct() {
         click(By.name("delete"));
     }
-
 
 
     public void create(ProductData product) {

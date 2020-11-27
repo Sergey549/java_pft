@@ -5,6 +5,7 @@ import litecart.tests.TestBase;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import java.io.File;
 import java.util.Comparator;
 import java.util.HashSet;
 import java.util.Set;
@@ -16,8 +17,9 @@ public class ProductCreationTest extends TestBase {
         app.checkAdminMainPageIsTrue();
         app.goTo().Catalog();
         Set<ProductData> before = app.product().all();
-        ProductData product = new ProductData
-                ("Duck2", null, null, null);
+        File photo = new File("src/test/resources/file.jpeg");
+        ProductData product = new ProductData().withName("Duck2")
+                .withShortDescription(null).withDescription(null).withTechnicalData(null).withPhoto(photo);
         app.product().create(product);
         Set<ProductData> after = app.product().all();
         Assert.assertEquals(after.size(), before.size() + 1);
