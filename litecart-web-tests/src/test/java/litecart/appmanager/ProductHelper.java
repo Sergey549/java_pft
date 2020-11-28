@@ -23,7 +23,7 @@ public class ProductHelper extends HelperBase {
 
     public void fillProductForm(ProductData productData) {
         type(By.name("name[en]"), productData.getDuckName());
-        attach(By.cssSelector("input[type='file']"),productData.getProductPhoto());
+        attach(By.cssSelector("input[type='file']"),productData.getPhoto());
         click(By.linkText("Information"));
         type(By.name("short_description[en]"), productData.getShortDescription());
         type(By.xpath("//div[@id='en']/div[2]/div/div/div[2]"), productData.getDescription());

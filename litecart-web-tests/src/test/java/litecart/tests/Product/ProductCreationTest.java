@@ -3,23 +3,33 @@ package litecart.tests.Product;
 import litecart.model.ProductData;
 import litecart.tests.TestBase;
 import org.testng.Assert;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-import java.io.File;
-import java.util.Comparator;
-import java.util.HashSet;
-import java.util.Set;
+import java.io.*;
+import java.util.*;
 
 public class ProductCreationTest extends TestBase {
 
-    @Test
-    public void testProductCreation() {
+    @DataProvider
+    public Iterator<Object[]> validProduct() throws IOException {
+        List<Object[]> list = new ArrayList<>();
+        BufferedReader reader = new BufferedReader(new FileReader(new File("src/test/resources/products.csv")));
+        String line = reader.readLine();
+        while (line != null) {
+            String[] split = line.split(";");
+            list.add(new Object[] {new ProductData().withName(split[0]).withShortDescription(split[1])
+                    .withDescription(split[2]).withTechnicalData(split[3])});
+            line = reader.readLine();
+        }
+        return list.iterator();
+    }
+
+    @Test (dataProvider = "validProduct")
+    public void testProductCreation(ProductData product) {
         app.checkAdminMainPageIsTrue();
         app.goTo().Catalog();
         Set<ProductData> before = app.product().all();
-        File photo = new File("src/test/resources/file.jpeg");
-        ProductData product = new ProductData().withName("Duck2")
-                .withShortDescription(null).withDescription(null).withTechnicalData(null).withPhoto(photo);
         app.product().create(product);
         Set<ProductData> after = app.product().all();
         Assert.assertEquals(after.size(), before.size() + 1);

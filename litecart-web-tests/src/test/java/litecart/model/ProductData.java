@@ -66,7 +66,7 @@ public class ProductData {
         return technicalData;
     }
 
-    public File getProductPhoto() {
+    public File getPhoto() {
         return photo;
     }
 

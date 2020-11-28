@@ -25,7 +25,7 @@ public class ProductModificationTest extends TestBase {
         Set<ProductData> before = app.product().all();
         ProductData modifiedProduct = before.iterator().next();
         ProductData product = new ProductData(modifiedProduct.getId(),
-                "Duck1", "test1", "test2", null) ;
+                "Duck2", "test1", "test2", null) ;
         app.product().modify(product);
         Set<ProductData> after = app.product().all();
         Assert.assertEquals(after.size(), before.size());
