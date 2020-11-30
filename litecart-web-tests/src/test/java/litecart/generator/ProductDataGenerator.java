@@ -1,5 +1,6 @@
 package litecart.generator;
 
+import com.beust.jcommander.JCommander;
 import com.beust.jcommander.Parameter;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -17,53 +18,60 @@ import java.util.Objects;
 
 public class ProductDataGenerator {
 
+    @Parameter(names = "-c", description = "Product count")
+    public static int count;
+
+    @Parameter(names = "-f", description = "File")
+    public static String file;
+
     @Parameter(names = "-d", description = "Data format")
     public static String format;
 
     public static void main(String[] args) throws IOException {
-        int count = Integer.parseInt(args[0]);
-        File file = new File(args[1]);
-        List<ProductData> products = generateGroups(count);
-        saveAsJson(products, file);
-//        if (format.equals("csv")) {
-//
-//        } else if (format.equals("xml")) {
-//            saveAsXml(products, file);
-//        } else if (format.equals("json")) {
-//            saveAsJson(products, file);
-//        } else {
-//            System.out.println("Unrecognized format " + format);
-//        }
+        ProductDataGenerator generator = new ProductDataGenerator();
+        new JCommander(generator, args);
+        generator.run();
     }
 
-    private static void saveAsJson(List<ProductData> products, File file) throws IOException {
+    private void run() throws IOException {
+        List<ProductData> products = generateGroups(count);
+        if (format.equals("csv")) {
+            saveAsCsv(products, new File(file));
+        } else if (format.equals("xml")) {
+            saveAsXml(products, new File(file));
+        } else if (format.equals("json")) {
+            saveAsJson(products, new File(file));
+        } else {
+            System.out.println("Unrecognized format " + format);
+        }
+    }
+
+    private void saveAsJson(List<ProductData> products, File file) throws IOException {
         Gson gson = new GsonBuilder().setPrettyPrinting().excludeFieldsWithoutExposeAnnotation().create();
         String json = gson.toJson(products);
-        Writer writer = new FileWriter(file);
-        writer.write(json);
-        writer.close();
-    }
-
-    private static void saveAsCsv(List<ProductData> products, File file) throws IOException {
-        Writer writer = new FileWriter(file);
-        for (ProductData product : products) {
-            writer.write(String.format("%s;%s;%s;%s\n",
-                    product.getDuckName(), product.getShortDescription(),
-                    product.getDescription(), product.getTechnicalData()));
+        try (Writer writer = new FileWriter(file)) {
+            writer.write(json);
         }
-        writer.close();
     }
 
+    private void saveAsCsv(List<ProductData> products, File file) throws IOException {
+        try (Writer writer = new FileWriter(file)) {
+            for (ProductData product : products) {
+                writer.write(String.format("%s;%s;%s;%s\n",
+                        product.getDuckName(), product.getShortDescription(),
+                        product.getDescription(), product.getTechnicalData()));
+            }
+        }
+    }
 
-    private static void saveAsXml(List<ProductData> products, File file) throws IOException {
+    private void saveAsXml(List<ProductData> products, File file) throws IOException {
         XStream xStream = new XStream();
         xStream.processAnnotations(ProductData.class);
         String xml = xStream.toXML(products);
-        Writer writer = new FileWriter(file);
-        writer.write(xml);
-        writer.close();
+        try (Writer writer = new FileWriter(file)) {
+            writer.write(xml);
+        }
     }
-
 
     private static List<ProductData> generateGroups(int count) {
         List<ProductData> groups = new ArrayList<>();

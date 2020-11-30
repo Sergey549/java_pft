@@ -18,47 +18,50 @@ public class ProductCreationTest extends TestBase {
     @DataProvider
     public Iterator<Object[]> validProductFromCsv() throws IOException {
         List<Object[]> list = new ArrayList<>();
-        BufferedReader reader = new BufferedReader
-                (new FileReader(new File("src/test/resources/products.xml")));
-        String line = reader.readLine();
-        while (line != null) {
-            String[] split = line.split(";");
-            list.add(new Object[] {new ProductData().withName(split[0]).withShortDescription(split[1])
-                    .withDescription(split[2]).withTechnicalData(split[3])});
-            line = reader.readLine();
+        try (BufferedReader reader = new BufferedReader
+                (new FileReader(new File("src/test/resources/products.xml")))) {
+            String line = reader.readLine();
+            while (line != null) {
+                String[] split = line.split(";");
+                list.add(new Object[] {new ProductData().withName(split[0]).withShortDescription(split[1])
+                        .withDescription(split[2]).withTechnicalData(split[3])});
+                line = reader.readLine();
+            }
+            return list.iterator();
         }
-        return list.iterator();
     }
 
     @DataProvider
     public Iterator<Object[]> validProductFromXml() throws IOException {
-        BufferedReader reader = new BufferedReader
-                (new FileReader(new File("src/test/resources/products.xml")));
-        String xml = "";
-        String line = reader.readLine();
-        while (line != null) {
-            xml += line;
-            line = reader.readLine();
+        try (BufferedReader reader = new BufferedReader
+                (new FileReader(new File("src/test/resources/products.xml")))) {
+            String xml = "";
+            String line = reader.readLine();
+            while (line != null) {
+                xml += line;
+                line = reader.readLine();
+            }
+            XStream xStream = new XStream();
+            xStream.processAnnotations(ProductData.class);
+            List<ProductData> products = (List<ProductData>)xStream.fromXML(xml);
+            return products.stream().map((g) -> new Object[] {g}).collect(Collectors.toList()).iterator();
         }
-        XStream xStream = new XStream();
-        xStream.processAnnotations(ProductData.class);
-        List<ProductData> products = (List<ProductData>)xStream.fromXML(xml);
-        return products.stream().map((g) -> new Object[] {g}).collect(Collectors.toList()).iterator();
     }
 
     @DataProvider
     public Iterator<Object[]> validProductFromJson() throws IOException {
-        BufferedReader reader = new BufferedReader
-                (new FileReader(new File("src/test/resources/products.json")));
-        String json = "";
-        String line = reader.readLine();
-        while (line != null) {
-            json += line;
-            line = reader.readLine();
+        try (BufferedReader reader = new BufferedReader
+                (new FileReader(new File("src/test/resources/products.json")))) {
+            String json = "";
+            String line = reader.readLine();
+            while (line != null) {
+                json += line;
+                line = reader.readLine();
+            }
+            Gson gson = new Gson();
+            List<ProductData> products = gson.fromJson(json, new TypeToken<List<ProductData>>() {}.getType()); // new TypeToken<List<ProductData>>() {}.getType() означает List<ProductData.class>
+            return products.stream().map((g) -> new Object[] {g}).collect(Collectors.toList()).iterator();
         }
-        Gson gson = new Gson();
-        List<ProductData> products = gson.fromJson(json, new TypeToken<List<ProductData>>() {}.getType()); // new TypeToken<List<ProductData>>() {}.getType() означает List<ProductData.class>
-        return products.stream().map((g) -> new Object[] {g}).collect(Collectors.toList()).iterator();
     }
 
     @Test (dataProvider = "validProductFromJson")
