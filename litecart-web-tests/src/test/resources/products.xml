@@ -1,0 +1,14 @@
+<list>
+  <product>
+    <duckName>Duck0</duckName>
+    <shortDescription>test0</shortDescription>
+    <description>test0</description>
+    <technicalData>test0</technicalData>
+  </product>
+  <product>
+    <duckName>Duck1</duckName>
+    <shortDescription>test1</shortDescription>
+    <description>test1</description>
+    <technicalData>test1</technicalData>
+  </product>
+</list>

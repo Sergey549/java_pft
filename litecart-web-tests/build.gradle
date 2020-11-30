@@ -14,6 +14,7 @@ repositories {
 dependencies {
     compile group: 'org.testng', name: 'testng', version: '6.14.3'
     compile 'org.seleniumhq.selenium:selenium-java:4.0.0-alpha-2'
+    compile 'com.thoughtworks.xstream:xstream:1.4.14'
 }
 
 test {

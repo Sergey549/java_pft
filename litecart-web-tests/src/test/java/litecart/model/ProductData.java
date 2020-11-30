@@ -1,10 +1,14 @@
 package litecart.model;
 
+import com.thoughtworks.xstream.annotations.XStreamAlias;
+import com.thoughtworks.xstream.annotations.XStreamOmitField;
+
 import java.io.File;
 import java.util.Objects;
 
+@XStreamAlias("product")
 public class ProductData {
-
+    @XStreamOmitField
     private int id;
     private String duckName;
     private String shortDescription;

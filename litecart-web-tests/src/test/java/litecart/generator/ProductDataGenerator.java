@@ -1,5 +1,7 @@
 package litecart.generator;
 
+import com.beust.jcommander.Parameter;
+import com.thoughtworks.xstream.XStream;
 import litecart.model.ProductData;
 
 import java.io.File;
@@ -8,18 +10,28 @@ import java.io.IOException;
 import java.io.Writer;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class ProductDataGenerator {
+
+    @Parameter(names = "-p", description = "Data format")
+    public static String format;
 
     public static void main(String[] args) throws IOException {
         int count = Integer.parseInt(args[0]);
         File file = new File(args[1]);
-
         List<ProductData> products = generateGroups(count);
-        save(products, file);
+        saveAsXml(products, file);
+        if (Objects.equals(format, "csv")) {
+            saveAsCsv(products, file);
+        } else if (Objects.equals(format, "xml")) {
+            saveAsXml(products, file);
+        } else {
+            System.out.println("Unrecognized format " + format);
+        }
     }
 
-    private static void save(List<ProductData> products, File file) throws IOException {
+    private static void saveAsCsv(List<ProductData> products, File file) throws IOException {
         Writer writer = new FileWriter(file);
         for (ProductData product : products) {
             writer.write(String.format("%s;%s;%s;%s\n",
@@ -28,6 +40,17 @@ public class ProductDataGenerator {
         }
         writer.close();
     }
+
+
+    private static void saveAsXml(List<ProductData> products, File file) throws IOException {
+        XStream xStream = new XStream();
+        xStream.processAnnotations(ProductData.class);
+        String xml = xStream.toXML(products);
+        Writer writer = new FileWriter(file);
+        writer.write(xml);
+        writer.close();
+    }
+
 
     private static List<ProductData> generateGroups(int count) {
         List<ProductData> groups = new ArrayList<>();
