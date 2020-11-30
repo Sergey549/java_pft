@@ -1,5 +1,7 @@
 package litecart.tests.Product;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.thoughtworks.xstream.XStream;
 import litecart.model.ProductData;
 import litecart.tests.TestBase;
@@ -14,28 +16,52 @@ import java.util.stream.Collectors;
 public class ProductCreationTest extends TestBase {
 
     @DataProvider
-    public Iterator<Object[]> validProduct() throws IOException {
-//      List<Object[]> list = new ArrayList<>();
+    public Iterator<Object[]> validProductFromCsv() throws IOException {
+        List<Object[]> list = new ArrayList<>();
+        BufferedReader reader = new BufferedReader
+                (new FileReader(new File("src/test/resources/products.xml")));
+        String line = reader.readLine();
+        while (line != null) {
+            String[] split = line.split(";");
+            list.add(new Object[] {new ProductData().withName(split[0]).withShortDescription(split[1])
+                    .withDescription(split[2]).withTechnicalData(split[3])});
+            line = reader.readLine();
+        }
+        return list.iterator();
+    }
+
+    @DataProvider
+    public Iterator<Object[]> validProductFromXml() throws IOException {
         BufferedReader reader = new BufferedReader
                 (new FileReader(new File("src/test/resources/products.xml")));
         String xml = "";
         String line = reader.readLine();
         while (line != null) {
             xml += line;
-//            Для формата csv
-//            String[] split = line.split(";");
-//            list.add(new Object[] {new ProductData().withName(split[0]).withShortDescription(split[1])
-//                    .withDescription(split[2]).withTechnicalData(split[3])});
             line = reader.readLine();
         }
         XStream xStream = new XStream();
         xStream.processAnnotations(ProductData.class);
         List<ProductData> products = (List<ProductData>)xStream.fromXML(xml);
         return products.stream().map((g) -> new Object[] {g}).collect(Collectors.toList()).iterator();
-//        return list.iterator();
     }
 
-    @Test (dataProvider = "validProduct")
+    @DataProvider
+    public Iterator<Object[]> validProductFromJson() throws IOException {
+        BufferedReader reader = new BufferedReader
+                (new FileReader(new File("src/test/resources/products.json")));
+        String json = "";
+        String line = reader.readLine();
+        while (line != null) {
+            json += line;
+            line = reader.readLine();
+        }
+        Gson gson = new Gson();
+        List<ProductData> products = gson.fromJson(json, new TypeToken<List<ProductData>>() {}.getType()); // new TypeToken<List<ProductData>>() {}.getType() означает List<ProductData.class>
+        return products.stream().map((g) -> new Object[] {g}).collect(Collectors.toList()).iterator();
+    }
+
+    @Test (dataProvider = "validProductFromJson")
     public void testProductCreation(ProductData product) {
         app.checkAdminMainPageIsTrue();
         app.goTo().Catalog();

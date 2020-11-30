@@ -1,5 +1,6 @@
 package litecart.model;
 
+import com.google.gson.annotations.Expose;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
 
@@ -10,9 +11,13 @@ import java.util.Objects;
 public class ProductData {
     @XStreamOmitField
     private int id;
+    @Expose
     private String duckName;
+    @Expose
     private String shortDescription;
+    @Expose
     private String description;
+    @Expose
     private String technicalData;
     private File photo;
 

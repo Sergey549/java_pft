@@ -1,13 +1,11 @@
 [
   {
-    "id": 0,
     "duckName": "Duck0",
     "shortDescription": "test0",
     "description": "test0",
     "technicalData": "test0"
   },
   {
-    "id": 0,
     "duckName": "Duck1",
     "shortDescription": "test1",
     "description": "test1",

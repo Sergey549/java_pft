@@ -1,8 +1,11 @@
 package litecart.generator;
 
 import com.beust.jcommander.Parameter;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.thoughtworks.xstream.XStream;
 import litecart.model.ProductData;
+
 
 import java.io.File;
 import java.io.FileWriter;
@@ -14,21 +17,31 @@ import java.util.Objects;
 
 public class ProductDataGenerator {
 
-    @Parameter(names = "-p", description = "Data format")
+    @Parameter(names = "-d", description = "Data format")
     public static String format;
 
     public static void main(String[] args) throws IOException {
         int count = Integer.parseInt(args[0]);
         File file = new File(args[1]);
         List<ProductData> products = generateGroups(count);
-        saveAsXml(products, file);
-        if (Objects.equals(format, "csv")) {
-            saveAsCsv(products, file);
-        } else if (Objects.equals(format, "xml")) {
-            saveAsXml(products, file);
-        } else {
-            System.out.println("Unrecognized format " + format);
-        }
+        saveAsJson(products, file);
+//        if (format.equals("csv")) {
+//
+//        } else if (format.equals("xml")) {
+//            saveAsXml(products, file);
+//        } else if (format.equals("json")) {
+//            saveAsJson(products, file);
+//        } else {
+//            System.out.println("Unrecognized format " + format);
+//        }
+    }
+
+    private static void saveAsJson(List<ProductData> products, File file) throws IOException {
+        Gson gson = new GsonBuilder().setPrettyPrinting().excludeFieldsWithoutExposeAnnotation().create();
+        String json = gson.toJson(products);
+        Writer writer = new FileWriter(file);
+        writer.write(json);
+        writer.close();
     }
 
     private static void saveAsCsv(List<ProductData> products, File file) throws IOException {
