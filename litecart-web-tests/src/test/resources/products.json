@@ -4,5 +4,11 @@
     "shortDescription": "test0",
     "description": "test0",
     "technicalData": "test0"
+  },
+  {
+    "duckName": "Duck1",
+    "shortDescription": "test1",
+    "description": "test1",
+    "technicalData": "test1"
   }
 ]

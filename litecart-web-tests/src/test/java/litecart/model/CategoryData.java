@@ -1,6 +1,5 @@
 package litecart.model;
 
-import java.io.File;
 
 public class CategoryData {
 

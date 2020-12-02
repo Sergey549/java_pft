@@ -1,5 +1,6 @@
 package litecart.appmanager;
 
+import com.beust.jcommander.Parameter;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -20,7 +21,6 @@ public class ApplicationManager {
     private CategoryHelper categoryHelper;
 
     public ApplicationManager(String browser) {
-
         this.browser = browser;
     }
 

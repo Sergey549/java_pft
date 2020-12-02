@@ -5,7 +5,10 @@ import com.google.gson.reflect.TypeToken;
 import com.thoughtworks.xstream.XStream;
 import litecart.model.ProductData;
 import litecart.tests.TestBase;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.testng.Assert;
+import org.testng.annotations.BeforeTest;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
@@ -64,8 +67,11 @@ public class ProductCreationTest extends TestBase {
         }
     }
 
+//    @BeforeTest
+
     @Test (dataProvider = "validProductFromJson")
     public void testProductCreation(ProductData product) {
+
         app.checkAdminMainPageIsTrue();
         app.goTo().Catalog();
         Set<ProductData> before = app.product().all();
