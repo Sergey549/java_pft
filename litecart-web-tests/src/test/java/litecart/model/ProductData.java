@@ -51,9 +51,7 @@ public class ProductData {
     }
 
     public ProductData() {
-
     }
-
 
     public int getId() {
         return id;
@@ -75,7 +73,7 @@ public class ProductData {
         return technicalData;
     }
 
-    public File getPhoto() {
+    public File getPhoto(File photo) {
         return photo;
     }
 

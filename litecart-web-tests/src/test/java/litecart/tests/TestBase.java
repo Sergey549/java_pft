@@ -1,15 +1,16 @@
 package litecart.tests;
 
+import com.beust.jcommander.JCommander;
 import litecart.appmanager.ApplicationManager;
+import litecart.generator.ProductDataGenerator;
 import litecart.tests.Product.ProductCreationTest;
 import org.openqa.selenium.remote.BrowserType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.AfterSuite;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.BeforeSuite;
+import org.testng.annotations.*;
 
+import java.io.File;
+import java.io.IOException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Arrays;

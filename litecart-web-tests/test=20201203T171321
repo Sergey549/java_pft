@@ -1,0 +1,2 @@
+28484 [Test worker] INFO  litecart.tests.TestBase - Start test testProductCreation with parameters [ProductData{id=0, duckName='Duck0'}]
+81378 [Test worker] INFO  litecart.tests.TestBase - Stop test testProductCreation

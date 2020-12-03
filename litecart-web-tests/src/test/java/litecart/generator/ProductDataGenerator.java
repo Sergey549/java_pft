@@ -1,11 +1,15 @@
 package litecart.generator;
 
+//Program arguments: -c 1 -f src/test/resources/products.json -d json
+//Working directory: "C:\Users\User\IdeaProjects\java_pft\litecart-web-tests"
+
 import com.beust.jcommander.JCommander;
 import com.beust.jcommander.Parameter;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.thoughtworks.xstream.XStream;
 import litecart.model.ProductData;
+import org.testng.annotations.BeforeTest;
 
 
 import java.io.File;
@@ -34,8 +38,7 @@ public class ProductDataGenerator {
         new JCommander(generator, args);
         generator.run();
     }
-
-    private void run() throws IOException {
+    public void run() throws IOException {
         List<ProductData> products = generateGroups(count);
         if (format.equals("csv")) {
             saveAsCsv(products, new File(file));

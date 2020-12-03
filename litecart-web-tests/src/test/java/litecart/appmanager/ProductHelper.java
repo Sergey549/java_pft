@@ -1,5 +1,6 @@
 package litecart.appmanager;
 
+import com.beust.jcommander.Parameter;
 import litecart.model.ProductData;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
@@ -7,6 +8,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 
+import java.io.File;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -21,9 +23,11 @@ public class ProductHelper extends HelperBase {
         super(driver);
     }
 
+    private File photo = new File("src/test/resources/file.jpeg");
+
     public void fillProductForm(ProductData productData) {
         type(By.name("name[en]"), productData.getDuckName());
-        attach(By.cssSelector("input[type='file']"),productData.getPhoto());
+        attach(By.cssSelector("input[type='file']"),productData.getPhoto(photo));
         click(By.linkText("Information"));
         type(By.name("short_description[en]"), productData.getShortDescription());
         type(By.xpath("//div[@id='en']/div[2]/div/div/div[2]"), productData.getDescription());

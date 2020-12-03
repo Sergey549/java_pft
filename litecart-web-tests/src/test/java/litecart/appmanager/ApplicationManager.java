@@ -1,12 +1,17 @@
 package litecart.appmanager;
 
+import com.beust.jcommander.JCommander;
 import com.beust.jcommander.Parameter;
+import litecart.generator.ProductDataGenerator;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.BrowserType;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.io.File;
+import java.io.IOException;
 
 import static org.openqa.selenium.support.ui.ExpectedConditions.urlContains;
 
